@@ -17,19 +17,19 @@ file_paths = []
 
 for item in os.listdir(desktop_path): #Get all files/folders in desktop
     full_path = os.path.join(desktop_path, item) # Full path of every item in desktop
-    if os.path.isfile(full_path):
+    if os.path.isfile(full_path) and not full_path == __file__:
         file_paths.append(full_path)
 
-os.makedirs(os.path.join(desktop_path, 'Images'), exist_ok=True)
+os.makedirs(os.path.join(desktop_path, 'Images'), exist_ok=True) # Make directory 'Images', if already exists then do nothing
 os.makedirs(os.path.join(desktop_path, 'Media'), exist_ok=True)
 os.makedirs(os.path.join(desktop_path, 'Text'), exist_ok=True)
 os.makedirs(os.path.join(desktop_path, 'Media/Audio'), exist_ok=True)
 os.makedirs(os.path.join(desktop_path, 'Text/Doc'), exist_ok=True)
 os.makedirs(os.path.join(desktop_path, 'Coding'), exist_ok=True)
 
-for path in file_paths:
-    if is_extension(path, ['.png', '.jpg', '.jpeg', '.jfif', '.gif', '.apng', '.webp']):
-        shutil.move(path, os.path.join(desktop_path, 'Images'))
+for path in file_paths: # Repeat for every item in desktop
+    if is_extension(path, ['.png', '.jpg', '.jpeg', '.jfif', '.gif', '.apng', '.webp', '.ico']):
+        shutil.move(path, os.path.join(desktop_path, 'Images')) # Move file to 'Images'
     elif is_extension(path, ['.mp4', '.mkv', '.flv', '.mov']):
         shutil.move(path, os.path.join(desktop_path, 'Media'))
     elif is_extension(path, ['.mp3', '.wav']):
